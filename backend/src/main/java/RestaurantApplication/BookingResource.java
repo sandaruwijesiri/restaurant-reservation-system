@@ -44,7 +44,19 @@ public class BookingResource {
     @POST
     public Response addReservation(@Valid BookingDTO dto) {
 
-        // System.out.println(dto.toString());
+        boolean tablesSelected = false;
+        for(TableItemDTO t:dto.tableData){
+            if(t.selectedIndex!=0){
+                tablesSelected = true;
+                break;
+            }
+        }
+        if(!tablesSelected){
+            return Response.status(Response.Status.CONFLICT)
+            .entity("Please select tables.")
+            .build();
+        }
+
         acquireLock();
 
         TableAvailabilityDTO tableAvailabilityDTO = new TableAvailabilityDTO();
@@ -139,7 +151,7 @@ public class BookingResource {
             releaseLock();
 
             return Response.status(Response.Status.CONFLICT)
-            .entity("Reservation not possible - tables already taken")
+            .entity("Reservation not possible - tables already taken.")
             .build();
         }
     }

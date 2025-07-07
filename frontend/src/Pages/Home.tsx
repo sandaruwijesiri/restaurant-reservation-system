@@ -106,6 +106,18 @@ for(let i=0;i<10;++i){
     }
 
     const addReservation = () => {
+        let tablesSelected = false;
+        for(let i=0;i<tablesDropDownStates.length;++i){
+            if(tablesDropDownStates[i].selectedIndex!=0){
+                tablesSelected = true;
+                break;
+            }
+        }
+        if(!tablesSelected){
+            alert("Please select tables.");
+            return;
+        }
+
         const url = 'http://localhost:8080/booking';
         const requestBody = {
                                         startTime: startTime,
@@ -113,28 +125,26 @@ for(let i=0;i<10;++i){
                                         tableData: tablesDropDownStates,
                                         mealData: mealsDropDownStates
                                     };
-                                    console.log(requestBody);
         axios.post(url,requestBody).then(
             response => {
-                let status = response.status;
-                if(status>=200 && status<300){
-                    console.log("Reservation Successful");
-                    navigate('/success',
-                        {
-                            state: {
-                                startTime: startTime.format('YYYY/MM/DD hh A'),
-                                endTime: endTime.format('YYYY/MM/DD hh A'),
-                                tableData: tablesDropDownStates,
-                                mealData: mealsDropDownStates
-                            }
+                console.log(response.status);
+                console.log("Reservation Successful");
+                navigate('/success',
+                    {
+                        state: {
+                            startTime: startTime.format('YYYY/MM/DD hh A'),
+                            endTime: endTime.format('YYYY/MM/DD hh A'),
+                            tableData: tablesDropDownStates,
+                            mealData: mealsDropDownStates
                         }
-                    );
-                }else{
-                    console.log("Something went wrong");
-                    console.log(response.data);
-                }
+                    }
+                );
             }
-        );
+        ).catch((error) => {
+            if(error.response.status === 409){
+                alert("Something went wrong: " + error.response.data);
+            }
+        });
     }
 
     useEffect(getAvailableTables, []);

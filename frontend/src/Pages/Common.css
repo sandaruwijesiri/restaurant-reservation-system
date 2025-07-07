@@ -1,0 +1,42 @@
+.container {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+/* common bg styles */
+.bg {
+  position: absolute;
+  background-size: cover;      /* scale to fill area */
+  background-position: center;  /* center the “cover” */
+  background-repeat: no-repeat;
+  filter: brightness(0.5);
+  z-index: -1;
+}
+
+/* each layer’s area & image */
+.bg1 {
+  top: 0; left: 0;
+  width: 50%;   /* 50% of container width */
+  height: 100%; /* 100% of container height */
+  background-image: url('../assets/images/interior.jpg');
+}
+
+.bg2 {
+  top: 0; right: 0;
+  width: 50%; 
+  height: 50%;  /* top-right quadrant */
+  background-image: url('../assets/images/food1.jpg');
+}
+
+.bg3 {
+  bottom: 0; right: 0;
+  width: 50%; 
+  height: 50%;  /* bottom-right quadrant */
+  background-image: url('../assets/images/food2.jpg');
+}

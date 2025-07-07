@@ -1,0 +1,89 @@
+.App {
+  text-align: center;
+}
+
+.container {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+/* common bg styles */
+.bg {
+  position: absolute;
+  background-size: cover;      /* scale to fill area */
+  background-position: center;  /* center the “cover” */
+  background-repeat: no-repeat;
+  filter: brightness(0.5);
+  z-index: -1;
+}
+
+/* each layer’s area & image */
+.bg1 {
+  top: 0; left: 0;
+  width: 50%;   /* 50% of container width */
+  height: 100%; /* 100% of container height */
+  background-image: url('../assets/images/interior.jpg');
+}
+
+.bg2 {
+  top: 0; right: 0;
+  width: 50%; 
+  height: 50%;  /* top-right quadrant */
+  background-image: url('../assets/images/food1.jpg');
+}
+
+.bg3 {
+  bottom: 0; right: 0;
+  width: 50%; 
+  height: 50%;  /* bottom-right quadrant */
+  background-image: url('../assets/images/food2.jpg');
+}
+
+/* your centered content */
+.content {
+  position: relative;  /* above the .bg layers */
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: rgba(255, 180, 100, 0.7);
+  border-radius: 20px;
+  padding: 2%;
+  width: 60%;
+}
+
+.welcome-message {
+    font-size: 5em;
+    line-height: 10%;
+    margin-bottom: 8%;
+    color: rgba(0,0,0, 0.793);
+}
+.buttons {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 10%;
+    align-items: center;
+    color: transparent;
+}
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color:rgb(36, 129, 242);
+    color: white;
+    border: none;
+    width: 200%;
+    border-radius: 5px;
+}
+button:hover {
+    background-color: rgb(28, 97, 182);
+}

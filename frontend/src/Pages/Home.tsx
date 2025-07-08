@@ -105,6 +105,49 @@ for(let i=0;i<10;++i){
         });
     }
 
+  const getMeals = () => {
+    const url = 'http://localhost:8080/meals';
+    
+    let mealsResponse:{
+        title: string;
+        description: string;
+        imagePath: string;
+        portions: string[];
+        prices: string[];
+    }[] = [];
+
+    axios.get(url)
+        .then(response => {
+            mealsResponse = response.data;
+            setMealsDropDownStates((prev) => {
+                let meals: ItemData[] = [];
+                for(const meal of mealsResponse){
+                    if(meal.portions.length>0){
+                        let dropDown = ['Not selected'];
+                        for(let i=0;i<meal.portions.length;++i){
+                            dropDown.push(meal.portions[i]);
+                        }
+                        let descriptionString = meal.description + "\n\nPortions: ";
+                        for(let i=1;i<dropDown.length;++i){
+                            descriptionString += "\n\t" + dropDown[i] + ": LKR " + meal.prices[i-1];
+                        }
+                        meals.push({
+                            title: meal.title, 
+                            description: descriptionString, 
+                            image: meal.imagePath, 
+                            dropDown: dropDown,
+                            selectedIndex: 0})
+                    }
+                }
+                return meals;
+            });
+            console.log('Response:', response.data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
     const addReservation = () => {
         let tablesSelected = false;
         for(let i=0;i<tablesDropDownStates.length;++i){
@@ -147,7 +190,10 @@ for(let i=0;i<10;++i){
         });
     }
 
-    useEffect(getAvailableTables, []);
+    useEffect(()=>{
+        getAvailableTables();
+        getMeals();
+    }, []);
     useEffect(()=>{
         if(endTime.isBefore(startTime)){
             setStartTime(endTime);

@@ -33,9 +33,6 @@ import jakarta.ws.rs.core.Response;
 public class TableResource {
     
     @Inject
-    EntityManager entityManager;
-
-    @Inject
     HelperMethods helperMethods;
 
     @POST

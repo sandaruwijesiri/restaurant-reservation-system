@@ -7,6 +7,8 @@ import Home from './Pages/Home';
 import LandingPage from './Pages/LandingPage';
 import SuccessPage from './Pages/SuccessPage';
 import MessagePage from './Pages/MessagePage';
+import RedirectionPage from './Pages/RedirectionPage';
+import AdminPage from './Pages/AdminPage';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +20,8 @@ const App: React.FC = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/success" element={<SuccessPage />} />
         <Route path="/message" element={<MessagePage />} />
+        <Route path="/redirect" element={<RedirectionPage />} />
+        <Route path="/adminPage" element={<AdminPage />} />
       </Routes>
     </Router>
   );

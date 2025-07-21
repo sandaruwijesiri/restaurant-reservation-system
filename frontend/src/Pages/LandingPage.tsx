@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './LandingPage.css';
 import { useNavigate } from 'react-router-dom';
-
-import interiorImg from '../assets/images/interior.jpg';
-import food1Img    from '../assets/images/food1.jpg';
-import food2Img    from '../assets/images/food2.jpg';
+import { keycloakLogin, keycloakRegistration } from '../Services/KeyCloakService';
 
 const LandingPage: React.FC = () => {
-  const navigate = useNavigate();
+
+  const login = () =>{
+    // navigate('/login');
+    keycloakLogin();
+  }
+
+  const register = () =>{
+    // navigate('/registration');
+    keycloakRegistration();
+  }
+
   return (
     <div className="container">
        <div className="bg bg1" />
@@ -19,8 +26,8 @@ const LandingPage: React.FC = () => {
            <p style={{fontSize: '0.4em'}}>Where memories are made...</p>
          </div>
          <div className="buttons">
-             <button onClick={() => navigate('/login')}>Log in</button>
-             <button onClick={() => navigate('/registration')}>Register</button>
+             <button onClick={() => login()}>Log in</button>
+             <button onClick={() => register()}>Register</button>
          </div>
        </div>
     </div>

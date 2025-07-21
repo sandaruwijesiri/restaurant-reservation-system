@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import './Common.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {Card, Button, TextField, Divider, Grid, Chip, Stack, BottomNavigationAction, BottomNavigation, Box, Typography, Select, MenuItem, SelectChangeEvent} from '@mui/material';
 
 import RestoreIcon from '@mui/icons-material/Restore';
@@ -19,6 +19,7 @@ import interiorImg from '../assets/images/interior.jpg';
 import food1Img from '../assets/images/food1.jpg';
 import {ItemData} from '../CustomTypes/TableAndMealItemData';
 import axios from 'axios';
+import { getKc, initCheckSso, kc } from '../Services/KeyCloakService';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -161,8 +162,10 @@ for(let i=0;i<10;++i){
             return;
         }
 
+        console.log(kc);
         const url = 'http://localhost:8080/booking';
         const requestBody = {
+                                        email: kc.tokenParsed.email,
                                         startTime: startTime,
                                         endTime: endTime,
                                         tableData: tablesDropDownStates,
@@ -193,6 +196,22 @@ for(let i=0;i<10;++i){
     useEffect(()=>{
         getAvailableTables();
         getMeals();
+
+        // initCheckSso().then((kc) => {
+        //     const roles = kc.tokenParsed?.realm_access?.roles;
+        //     console.log("Roles:", roles);
+        //     console.log("Email:", kc.tokenParsed?.email);
+        //     console.log("Email:", kc.tokenParsed?.firstName);
+        //     console.log("Email:", kc.tokenParsed?.lastName);
+        // });
+        
+        // let kc = getKeycloakInstance()
+        // const roles = kc.tokenParsed?.realm_access?.roles;
+        // console.log("Roles:", roles);
+        // console.log("Email:", kc.tokenParsed?.email);
+        // console.log("Email:", kc.tokenParsed?.firstName);
+        // console.log("Email:", kc.tokenParsed?.lastName);
+
     }, []);
     useEffect(()=>{
         if(endTime.isBefore(startTime)){
@@ -206,6 +225,7 @@ for(let i=0;i<10;++i){
         }
         getAvailableTables();
     }, [startTime]);
+    
     
 
   

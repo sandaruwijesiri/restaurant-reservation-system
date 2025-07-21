@@ -5,19 +5,21 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class CustomerDTO{
-  @NotNull @Size(min=10, max=12)
-  public String nic;
   @NotBlank @Size(max=15)
-  public String firstName;
+  private String firstName;
   @NotBlank @Size(max=20)
-  public String lastName;
+  private String lastName;
   @NotBlank @Size(min = 10, max=10)
-  public String phoneNumber;
+  private String phoneNumber;
   @NotBlank @Size(max=30)
-  public String email;
-  @NotBlank @Size(min = 10, max=10)
-  public String password;
+  private String email;
 
   
     /**  
@@ -25,12 +27,10 @@ public class CustomerDTO{
      */
     public static CustomerDTO fromEntity(Customer c) {
         CustomerDTO dto = new CustomerDTO();
-        dto.nic       = c.nic;
-        dto.firstName = c.firstName;
-        dto.lastName  = c.lastName;
-        dto.phoneNumber       = c.phoneNumber;
-        dto.email = c.email;
-        dto.password  = c.password;
+        dto.firstName = c.getFirstName();
+        dto.lastName  = c.getLastName();
+        dto.phoneNumber = c.getPhoneNumber();
+        dto.email = c.getEmail();
         return dto;
     }
 
@@ -39,12 +39,10 @@ public class CustomerDTO{
      */
     public Customer toEntity() {
         Customer c = new Customer();
-        c.nic           = this.nic;
-        c.firstName     = this.firstName;
-        c.lastName      = this.lastName;
-        c.phoneNumber   = this.phoneNumber;
-        c.email         = this.email;
-        c.password      = this.password;
+        c.setFirstName(this.firstName);
+        c.setLastName(this.lastName);
+        c.setPhoneNumber(this.phoneNumber);
+        c.setEmail(this.email);
         return c;
     }
 }

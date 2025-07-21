@@ -14,13 +14,19 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class MealPortion extends PanacheEntityBase{
     
     @Id
     @Column(nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(
@@ -28,10 +34,10 @@ public class MealPortion extends PanacheEntityBase{
         referencedColumnName = "title",// referenced PK column
         nullable = false
     )
-    public Meal meal;
+    private Meal meal;
 
     @Column(nullable=false)
-    public String portion;
+    private String portion;
     @Column(nullable=false)
-    public BigDecimal price;
+    private BigDecimal price;
 }

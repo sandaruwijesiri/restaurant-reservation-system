@@ -10,10 +10,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginDTO {
-  @NotNull
-  private String email;
-  @NotBlank @Size(min = 10, max=10)
-  private String password;
+public class AddTableDTO {
     
+  @NotNull
+  private String title;
+  @NotNull
+  private String description;
+  @NotNull
+  private Integer amountOfTables;
+  @NotNull
+  private Integer seatCount;
+  @NotNull
+  private Integer price;
 }

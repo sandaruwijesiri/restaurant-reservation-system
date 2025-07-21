@@ -5,19 +5,21 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class Customer extends PanacheEntityBase{
     @Id
-    @Column(length = 12, nullable=false)
-    public String nic;
+    @Column(length = 255, nullable=false)
+    private String email;
     @Column(length = 15, nullable=false)
-    public String firstName;
+    private String firstName;
     @Column(length = 20, nullable=false)
-    public String lastName;
+    private String lastName;
     @Column(length = 10, nullable=false)
-    public String phoneNumber;
-    @Column(length = 30, nullable=false)
-    public String email;
-    @Column(length = 10, nullable=false)
-    public String password;
+    private String phoneNumber;
 }

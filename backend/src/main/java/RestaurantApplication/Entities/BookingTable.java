@@ -10,12 +10,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class BookingTable extends PanacheEntityBase{
     @Id
     @Column(nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    private Integer id;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(
@@ -23,7 +29,7 @@ public class BookingTable extends PanacheEntityBase{
         referencedColumnName = "id",// referenced PK column
         nullable = false
     )
-    public Booking booking;
+    private Booking booking;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(
@@ -31,5 +37,5 @@ public class BookingTable extends PanacheEntityBase{
         referencedColumnName = "id",// referenced PK column
         nullable = false
     )
-    public PhysicalTable table;
+    private PhysicalTable table;
 }

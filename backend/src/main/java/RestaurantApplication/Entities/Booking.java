@@ -13,25 +13,31 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class Booking extends PanacheEntityBase{
     @Id
     @Column(nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    private Integer id;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(
-        name = "nic",                // the FK column
-        referencedColumnName = "nic",// referenced PK column
+        name = "email",                // the FK column
+        referencedColumnName = "email",// referenced PK column
         nullable = false
     )
-    public Customer customer;
+    private Customer customer;
 
     @Column(nullable=false)
-    public OffsetDateTime startTime;
+    private OffsetDateTime startTime;
     @Column(nullable=false)
-    public OffsetDateTime endTime;
+    private OffsetDateTime endTime;
     @Column(nullable=false)
-    public BigDecimal totalPrice;
+    private BigDecimal totalPrice;
 }

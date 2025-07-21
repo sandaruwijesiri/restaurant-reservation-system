@@ -1,4 +1,4 @@
-package RestaurantApplication;
+package RestaurantApplication.Resources;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -10,10 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import RestaurantApplication.DTOs.AddTableDTO;
 import RestaurantApplication.DTOs.CustomerDTO;
 import RestaurantApplication.DTOs.TableAvailabilityDTO;
 import RestaurantApplication.Entities.Customer;
 import RestaurantApplication.Entities.TableInfo;
+import RestaurantApplication.Services.TableService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -33,11 +35,18 @@ import jakarta.ws.rs.core.Response;
 public class TableResource {
     
     @Inject
-    HelperMethods helperMethods;
+    TableService tableService;
 
     @POST
     public Response getAvailableTables(@Valid TableAvailabilityDTO dto) {
 
-        return Response.ok(helperMethods.getAvailableTables(dto)).build();
+        return Response.ok(tableService.getAvailableTables(dto)).build();
+    }
+
+    @POST
+    @Path("/add")
+    public Response addTable(@Valid AddTableDTO dto) {
+
+        return tableService.addTable(dto);
     }
 }

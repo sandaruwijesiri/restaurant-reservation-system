@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html><body>
+  <script>
+    // Keycloak’s iframe will post this URL back to the parent
+    parent.postMessage(location.href, location.origin);
+  </script>
+</body></html>

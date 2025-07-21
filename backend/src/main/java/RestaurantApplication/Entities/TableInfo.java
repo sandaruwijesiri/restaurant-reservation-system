@@ -9,22 +9,28 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class TableInfo extends PanacheEntityBase{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable=false)
-    public Integer id;
+    private Integer id;
     @Column(nullable=false)
-    public String title;
+    private String title;
     @Column(nullable=false)
-    public Integer seatCount;
+    private Integer seatCount;
     @Column(nullable=false)
-    public Integer noOfTables;
+    private Integer noOfTables;
     @Column(nullable=false)
-    public BigDecimal priceperhour;
+    private BigDecimal priceperhour;
     @Column(nullable=false)
-    public String imagepath;
+    private String imagepath;
     @Column(nullable=false)
-    public String description;
+    private String description;
 }
